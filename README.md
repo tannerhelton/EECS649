@@ -1,4 +1,4 @@
 # EECS649
 Repo for my EECS649 class (Artificial Intelligence)
 
-[Tanner Helton](https://tannerhelton.com)
+By [Tanner Helton](https://tannerhelton.com) Spring 2023
