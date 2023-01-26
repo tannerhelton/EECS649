@@ -1,33 +1,41 @@
-# Simulating Luenberger's Weather Model
-
-# States are Sunny (S), Cloudy (C), Raining (R)
-
+import time
 import random
 
-state = "S" # start state
-STEPS = 20
+def main():
+    print("Hi! Please enter the start state and the amount of H -> H transitions and T -> T transitions for the first 21 flips.")
+    while True:
+        try:
+            init = str(input("Enter the start state: "))
+            break
+        except:
+            print("That is not a valid option!")
+    while True:
+        try:
+            a = int(input("Enter the amount of H -> H transitions for the first 21 flips: "))
+            break
+        except:
+            print("That is not a valid option!")
+    while True:
+        try:
+            b = int(input("Enter the amount of T -> T transitions for the first 21 flips:  "))
+            break
+        except:
+            print("That is not a valid option!")
 
-# in Python range(N) produces the values 0 to N-1;
-# hence useful to repeat something N times
-for i in range(STEPS+1): 
-    print(state, end=", ")  # print(state) would end with the default newline
-    r = random.random() # pick a uniform random number 0 <= r < 1
-    if state == "S":
-        if r <= 0.5:
-            nextstate = "S"
-        else:
-            nextstate = "C"
-    elif state == "C":
-        if r <= 0.5:
-            nextstate = "S"
-        elif r <= 0.75:
-            nextstate = "C"
-        else:
-            nextstate = "R"
-    else: # state == "R"
-        if r <= 0.5:
-            nextstate = "C"
-        else:
-            nexstate = "R"
-    state = nextstate
-  
+    steps = 10
+    for i in range(steps+1): 
+        print(init, end=", ")  
+        rand = random.random() 
+        if init == "H":
+            if rand <= (a / 20):
+                nextState = "H"
+            else:
+                nextState = "T"
+        elif init == "T":
+            if rand <= (b / 20):
+                nextState = "T"
+            else:
+                nextState = "H"
+        init = nextState
+
+main()
