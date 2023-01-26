@@ -15,23 +15,37 @@ def addInts(a, b):
     digits = aDig if aDig < bDig else bDig
     if digits < 2:
         time.sleep(random.randint(1, 2))
+        if random.random() < 0.05:
+            sum = sum + 1 if random.random() < 0.5 else sum - 1
     elif digits < 4:
         time.sleep(random.randint(1, 3))
+        if random.random() < 0.25:
+            sum = sum * 1.1 if random.random() < 0.5 else sum * 0.9
     elif digits < 6:
         time.sleep(random.randint(1, 7))
+        if random.random() < 0.5:
+            sum = sum * 1.1 if random.random() < 0.5 else sum * 0.9
     elif digits < 8:
         time.sleep(random.randint(3, 9))
+        if random.random() < 0.5:
+            sum = sum * 1.1 if random.random() < 0.5 else sum * 0.9
     elif digits < 10:
         time.sleep(random.randint(6, 14))
+        if random.random() < 0.5:
+            sum = sum * 1.1 if random.random() < 0.5 else sum * 0.9
     elif digits < 12:
         time.sleep(random.randint(9, 18))
+        if random.random() < 0.5:
+            sum = sum * 1.1 if random.random() < 0.5 else sum * 0.9
     elif digits < 14:
         time.sleep(random.randint(15, 22))
+        if random.random() < 0.5:
+            sum = sum * 1.1 if random.random() < 0.5 else sum * 0.9
     else:
         time.sleep(random.randint(17, 25))
+        if random.random() < 0.5:
+            sum = sum * 1.1 if random.random() < 0.5 else sum * 0.9
 
-    if random.random() < 0.5:
-        sum = sum * 1.1 if random.random() < 0.5 else sum * 0.9
     return int(round(sum, 0))
 
 def main():
