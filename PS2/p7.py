@@ -1,3 +1,4 @@
+import time
 from agents import *
 from notebook import psource
 
@@ -39,66 +40,26 @@ class TrivialVacuumEnvironment(Environment):
         """Agents start in either location at random."""
         return random.choice([loc_A, loc_B])
     
-# loc_A, loc_B = (0, 0), (1, 0)
-
-# # Initialize the two-state environment
+start_time = time.time()
+loc_A, loc_B = (0, 0), (1, 0)
 trivial_vacuum_env = TrivialVacuumEnvironment()
 
-# # Check the initial state of the environment
-# print("State of the Environment: {}.".format(trivial_vacuum_env.status))
+table = {((loc_A, 'Clean'),): 'Right',
+             ((loc_A, 'Dirty'),): 'Suck',
+             ((loc_B, 'Clean'),): 'Left',
+             ((loc_B, 'Dirty'),): 'Suck',
+             ((loc_A, 'Dirty'), (loc_A, 'Clean')): 'Right',
+             ((loc_A, 'Clean'), (loc_B, 'Dirty')): 'Suck',
+             ((loc_B, 'Clean'), (loc_A, 'Dirty')): 'Suck',
+             ((loc_B, 'Dirty'), (loc_B, 'Clean')): 'Left'
+        }
 
-# random_agent = Agent(program=RandomAgentProgram(['Right', 'Left', 'Suck', 'NoOp']))
 
-# trivial_vacuum_env.add_thing(random_agent)
+table_driven_agent = Agent(program=TableDrivenAgentProgram(table=table))
 
-# # Running the environment
-# trivial_vacuum_env.step()
+trivial_vacuum_env.add_thing(table_driven_agent)
 
-# # Check the current state of the environment
-# print("State of the Environment: {}.".format(trivial_vacuum_env.status))
-
-# print("RandomVacuumAgent is located at {}.".format(random_agent.location))
-
-# table = {((loc_A, 'Clean'),): 'Right',
-#              ((loc_A, 'Dirty'),): 'Suck',
-#              ((loc_B, 'Clean'),): 'Left',
-#              ((loc_B, 'Dirty'),): 'Suck',
-#              ((loc_A, 'Dirty'), (loc_A, 'Clean')): 'Right',
-#              ((loc_A, 'Clean'), (loc_B, 'Dirty')): 'Suck',
-#              ((loc_B, 'Clean'), (loc_A, 'Dirty')): 'Suck',
-#              ((loc_B, 'Dirty'), (loc_B, 'Clean')): 'Left',
-#              ((loc_A, 'Dirty'), (loc_A, 'Clean'), (loc_B, 'Dirty')): 'Suck',
-#              ((loc_B, 'Dirty'), (loc_B, 'Clean'), (loc_A, 'Dirty')): 'Suck'
-#         }
-
-# # Create a table-driven agent
-# table_driven_agent = Agent(program=TableDrivenAgentProgram(table=table))
-
-# # trivial_vacuum_env.delete_thing(random_agent)
-
-# # Add the table-driven agent to the environment
-# trivial_vacuum_env.add_thing(table_driven_agent)
-
-# print("TableDrivenVacuumAgent is located at {}.".format(table_driven_agent.location))
-
-# # Run the environment
-# trivial_vacuum_env.step()
-
-# # Check the current state of the environment
-# print("State of the Environment: {}.".format(trivial_vacuum_env.status))
-
-# print("TableDrivenVacuumAgent is located at {}.".format(table_driven_agent.location))
-
-def update_state(state, action, percept, model):
-    pass
-
-# Create a model-based reflex agent
-model_based_reflex_agent = ModelBasedVacuumAgent()
-
-# Add the agent to the environment
-trivial_vacuum_env.add_thing(model_based_reflex_agent)
-
-print("ModelBasedVacuumAgent is located at {}.".format(model_based_reflex_agent.location))
+print("TableDrivenVacuumAgent is located at {}.".format(table_driven_agent.location))
 
 # Run the environment
 trivial_vacuum_env.step()
@@ -106,4 +67,6 @@ trivial_vacuum_env.step()
 # Check the current state of the environment
 print("State of the Environment: {}.".format(trivial_vacuum_env.status))
 
-print("ModelBasedVacuumAgent is located at {}.".format(model_based_reflex_agent.location))
+print("TableDrivenVacuumAgent is located at {}.".format(table_driven_agent.location))
+end_time = time.time() - start_time
+print(end_time)
